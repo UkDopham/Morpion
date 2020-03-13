@@ -12,3 +12,6 @@ class MiniMax:
     def max_value(state):
         
     def mini_value(state):
+        
+        
+        

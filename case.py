@@ -5,3 +5,6 @@ class Case:
         self.x = x
         self.y = y
         self.val = val    #value of the case
+        
+    def getValue(self):
+        return self.val

@@ -16,12 +16,13 @@ class Morpion:
         self.actions = []
         self.matrix = self.createMatrix()
         
-    def __str__(self):
-        content = ""
-        for row in self.matrix:
+    def showMatrix(self):
+        for row in range(0, len(self.matrix)):
             rowContent = ""
-            for colmun in self.matrix[row]:
-                rowContent
+            for column in range(0,len(self.matrix[row])):
+                rowContent += str(self.matrix[row][column].getValue()) + " "
+            print(rowContent)
+            print("\n")
         
     def createMatrix(self): #Create the matrix with the length given in parameter
         matrix = []
@@ -41,8 +42,25 @@ class Morpion:
                     tab.append(Case(i,j))
                 
         return tab
+    
     def getStateValue(self):#return -1 if lost , 0 if even, 1 if win
-        return 0
+        for row in range (0, len(self.matrix)):
+            value = self.checkRow(row)
+            if value != - 1:
+                return value
+        
+        for column in range(0, len(self.matrix)):
+            value = self.checkColumn(column)
+            if value != -1:
+                return value
+        
+        value = self.checkDiagonal(1)
+        if value != -1:
+            return value
+        
+        value = self.checkDiagonal(-1)
+        if value != -1:
+            return value
     
     def checkRow(self, rowIndex): #return the value of the winner if there is none return -1
         row = self.matrix[rowIndex]
@@ -56,5 +74,27 @@ class Morpion:
         column = []
         for i in len(self.matrix):
             column.append(self.matrix[i][columnIndex]) #get the column value
+        tmp = column[0]
+        for i in range(0, len(column)):
+            if tmp != i:
+                return -1
+        return tmp
     
+    def checkDiagonal(self, direction): #return the value of the winner if there is none return -1 , direction = -1 from up to bottom , 1 from bottom to up
+        diagonal = []
+        if direction == 1:
+            for row in range(len(self.matrix), 0, -1):
+                for column in range(0, len(self.matrix)):
+                    if row == column:
+                        diagonal.append(self.matrix[row][column])
+        else :
+            for row in range(0, len(self.matrix)):
+                for column in range(0, len(self.matrix)):
+                    if row == column:
+                        diagonal.append(self.matrix[row][column])
+        tmp = diagonal[0]
+        for i in range(0, len(diagonal)):
+            if tmp != i:
+                return -1
+        return tmp
         

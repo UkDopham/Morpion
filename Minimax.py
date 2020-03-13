@@ -15,13 +15,14 @@ class MiniMax:
         self.state = self.node
 
     def generateNodeBranches(self,node):  # return a tree composed of all the possible different states of the game
-        actionsPossibles = node.value.action()
-        node.nexts = [Node(action) for action in actionsPossibles]
+        nodeState = node.value.getState()
+        if (nodeState==0 and len(node.value.emptyCases())==0) or (nodeState!=0):
+            node.nexts= [Node(nodeState)]
+        else:
+            actionsPossibles = node.value.createNexts()
+            node.nexts = [Node(action) for action in actionsPossibles]
 
-        return 0
-
-    def minimax_decision(self,
-                         state):  # return de game state in the max node value
+    def minimax_decision(self, state):  # return de game state in the max node value
         return self.max_value(state)
 
     def max_value(self, state):  # node with de max value
@@ -29,3 +30,4 @@ class MiniMax:
 
     def mini_value(self, state):  # node with de min value
         return state.Max_LinkedNodeValue()
+

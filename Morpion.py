@@ -61,6 +61,8 @@ class Morpion:
         value = self.checkDiagonal(-1)
         if value != -1:
             return value
+
+        return 0
     
     def checkRow(self, rowIndex): #return the value of the winner if there is none return -1
         row = self.matrix[rowIndex]

@@ -11,10 +11,24 @@ class Morpion:
     VAL_J1 = 1
     VAL_J2 = 2
     
-    def __init__(self, length=3):
+    def __init__(self, lastP = 1, length=3, matrix = None):
         self.length = length
-        self.actions = []
-        self.matrix = self.createMatrix()
+        if matrix == None:            
+            self.matrix = self.createMatrix()
+        else:
+            self.matrix = matrix
+        self.lastP = lastP
+        
+    def createNexts(self):
+        nexts = []
+        currentP = self.VAL_J1 if self.lastP == self.VAl_J2 else self.VAL_J2
+        emptyCasesL = self.emptyCases()
+        for i in range(0, len(emptyCasesL)):
+            matrixTmp = self.matrix
+            matrixTmp[emptyCasesL[i].getRow()][emptyCasesL[i].getColumn()] = currentP
+            nexts.append(nexts)
+        return nexts
+            
         
     def showMatrix(self):
         for row in range(0, len(self.matrix)):
@@ -61,6 +75,8 @@ class Morpion:
         value = self.checkDiagonal(-1)
         if value != -1:
             return value
+        
+        return 0
     
     def checkRow(self, rowIndex): #return the value of the winner if there is none return -1
         row = self.matrix[rowIndex]
@@ -72,7 +88,7 @@ class Morpion:
     
     def checkColumn(self, columnIndex): #return the value of the winner if there is none return -1
         column = []
-        for i in len(self.matrix):
+        for i in range(0,len(self.matrix)):
             column.append(self.matrix[i][columnIndex]) #get the column value
         tmp = column[0]
         for i in range(0, len(column)):

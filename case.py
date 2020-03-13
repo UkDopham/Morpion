@@ -8,3 +8,9 @@ class Case:
         
     def getValue(self):
         return self.val
+    
+    def getRow(self):
+        return self.x
+    
+    def getColumn(self):
+        return self.y

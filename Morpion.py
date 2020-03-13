@@ -14,11 +14,7 @@ class Morpion:
     def __init__(self, length=3):
         self.length = length
         self.actions = []
-<<<<<<< HEAD
         self.matrix = self.createMatrix()
-                
-=======
-        self.matrix = self.createMatrix(length)
         
     def __str__(self):
         content = ""
@@ -26,7 +22,6 @@ class Morpion:
             rowContent = ""
             for colmun in self.matrix[row]:
                 rowContent
->>>>>>> 8c94550ede3f5f7da3594467686c17f708da70b7
         
     def createMatrix(self): #Create the matrix with the length given in parameter
         matrix = []
@@ -38,7 +33,6 @@ class Morpion:
         
         return matrix
     
-<<<<<<< HEAD
     def emptyCases(self) : #Return an array contaning all the empty CASES of the MATRIX
         tab = []
         for i in range (0, self.length):
@@ -47,7 +41,6 @@ class Morpion:
                     tab.append(Case(i,j))
                 
         return tab
-=======
     def getStateValue(self):#return -1 if lost , 0 if even, 1 if win
         return 0
     
@@ -65,4 +58,3 @@ class Morpion:
             column.append(self.matrix[i][columnIndex]) #get the column value
     
         
->>>>>>> 8c94550ede3f5f7da3594467686c17f708da70b7

@@ -4,7 +4,20 @@ Created on Fri Mar 13 12:24:35 2020
 
 @author: Alexa
 """
+import time
 from Morpion import Morpion
+from Minimax import MiniMax
 
-test = Morpion()
-test.showMatrix()
+
+print("Debut")
+debutchrono = time.time()
+mM = MiniMax(Morpion)
+print('cpt: ', mM.compteur  ,'   fin de branches:', mM.finDeBranches)
+finchrono = time.time()
+print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
+
+mM.node.gothrough()
+print("Fin")
+
+#avec find 32 s   30%
+#sans find 29 s   30%

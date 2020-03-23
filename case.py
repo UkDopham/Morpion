@@ -5,12 +5,28 @@ class Case:
         self.x = x
         self.y = y
         self.val = val    #value of the case
-        
-    def getValue(self):
+    
+    def __eq__(self,other):#used for comparing two instances of Morpion
+        if isinstance(other,self.__class__):
+            return self.val == other.val
+        elif isinstance(other,int):
+            return self.val == other
+        else:
+            return False
+    def __ne__(self,other):
+        return not self.__eq__(other)
+
+    def getValue(self):#get val
         return self.val
     
-    def getRow(self):
+    def getRow(self):#get x
         return self.x
     
-    def getColumn(self):
+    def getColumn(self):#get y
         return self.y
+
+    def __str__(self):
+        return str(self.val)+" "
+
+    def __repr__(self):
+        return str(self.val)

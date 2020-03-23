@@ -12,11 +12,11 @@ from Minimax import MiniMax
 print("Debut")
 debutchrono = time.time()
 mM = MiniMax(Morpion)
-print('cpt: ', mM.compteur  ,'   fin de branches:', mM.finDeBranches)
+print('cpt: ', mM.arbre.compteur  ,'   fin de branches:', mM.arbre.finDeBranches)
 finchrono = time.time()
 print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
 
-mM.node.gothrough()
+mM.arbre.node.gothrough()
 print("Fin")
 
 #avec find 32 s   30%

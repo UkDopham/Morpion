@@ -140,6 +140,8 @@ class Morpion:
     def __str__(self): #return the values of the matrix in three separated lines.   X = P1  O = P2  * = empty case
         return self.toLines('\n')
         
+    def GetMatrix(self):
+        return self.matrix
 
     def __eq__(self,other): #used for comparing two instances of Morpion
         if isinstance(other,self.__class__):

@@ -7,17 +7,31 @@ Created on Fri Mar 13 12:24:35 2020
 import time
 from Morpion import Morpion
 from Minimax import MiniMax
+from Coord import Coord
 
 
-print("Debut")
-debutchrono = time.time()
-mM = MiniMax(Morpion)
-print('cpt: ', mM.compteur  ,'   fin de branches:', mM.finDeBranches)
-finchrono = time.time()
-print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
+def inputUser(morpion):
+    print('A votre tour de jouer')
+    print(morpion)
+    row = int(input('row : '))
+    column = int(input('column : '))
+    return Coord(row, column)
 
-mM.node.gothrough()
-print("Fin")
+
+#print("Debut")
+#debutchrono = time.time()
+#mM = MiniMax(Morpion)
+#print('cpt: ', mM.compteur  ,'   fin de branches:', mM.finDeBranches)
+#finchrono = time.time()
+#print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
+
+#mM.node.gothrough()
+#print("Fin")
 
 #avec find 32 s   30%
 #sans find 29 s   30%
+
+test = Morpion()
+
+coord = inputUser(test)
+print(coord)

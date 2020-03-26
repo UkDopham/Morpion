@@ -12,3 +12,9 @@ class Coord:
 
     def __str__(self):
         return str(self.row) + ':' + str(self.column)
+    
+    def getRow(self):
+        return self.row
+    
+    def getColumn(self):
+        return self.column

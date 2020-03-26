@@ -6,6 +6,7 @@ Created on Fri Mar 13 12:24:35 2020
 """
 import time
 from Morpion import Morpion
+from Arbre import Arbre
 from Minimax import MiniMax
 from Coord import Coord
 
@@ -18,20 +19,19 @@ def inputUser(morpion):
     return Coord(row, column)
 
 
-#print("Debut")
-#debutchrono = time.time()
-#mM = MiniMax(Morpion)
-#print('cpt: ', mM.compteur  ,'   fin de branches:', mM.finDeBranches)
-#finchrono = time.time()
-#print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
+print("Debut")
+debutchrono = time.time()
+mM = Arbre(Morpion)
+finchrono = time.time()
+print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
 
-#mM.node.gothrough()
-#print("Fin")
+mM.node.gothrough()
+print("Fin")
 
 #avec find 32 s   30%
 #sans find 29 s   30%
 
-test = Morpion()
+# test = Morpion()
 
-coord = inputUser(test)
-print(coord)
+# coord = inputUser(test)
+# print(coord)

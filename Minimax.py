@@ -6,6 +6,7 @@ Created on Fri Mar 13 12:45:30 2020
 """
 from Node import Node
 from Arbre import Arbre
+from Morpion import Morpion
 """
 essentials game methods :
  - toLines
@@ -21,12 +22,15 @@ essentials game methods :
 class Minimax:
     def __init__(self, game):
         self.game = game
-        self.arbre = Arbre(game)
-        self.node = Node(self.arbre.node)
+        print(type(game))
+        self.arbre = Arbre(self.game)
+        self.node = self.arbre.node
+        print(type(self.node))
+        print(type(self.node.value))
         self.s = self.node.value# s: valeur du jeu dans notre cas
     
     def UpdateNode(self,state):
-        self.node = self.node.Find(state)
+        self.node = self.node.find(state)
 
     def Actions(self,s):  # listes les actions possibles
         return self.node.nexts

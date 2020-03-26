@@ -12,7 +12,7 @@ class Node:
         self.nexts = []
         self.value = value
         
-    def find(self,value,rang,nbDifference=9):#look in this tree, if there is a node like value
+    def find(self,value,rang = 1,nbDifference=9):#look in this tree, if there is a node like value
         if (rang == 0):#difference de la hauteur dans l'arbre entre self et value
 
             if nbDifference==0:

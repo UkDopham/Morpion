@@ -7,26 +7,12 @@ Created on Fri Mar 13 12:24:35 2020
 import time
 from Morpion import Morpion
 from Arbre import Arbre
-from Minimax import MiniMax
+from Minimax import Minimax
 from Coord import Coord
+from Party import Party
 
-
-def inputUser(morpion):
-    print('A votre tour de jouer')
-    print(morpion)
-    row = int(input('row : '))
-    column = int(input('column : '))
-    return Coord(row, column)
-
-
-print("Debut")
-debutchrono = time.time()
-mM = Arbre(Morpion)
-finchrono = time.time()
-print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
-
-mM.node.gothrough()
-print("Fin")
+game = Party(Morpion, "liolio", )
+game.runParty()
 
 #avec find 32 s   30%
 #sans find 29 s   30%

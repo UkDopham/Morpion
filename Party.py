@@ -5,13 +5,13 @@ Created on Thu Mar 26 14:38:42 2020
 @author: Alexa
 """
 from Minimax import Minimax
+from Morpion import Morpion
 
 
-
-class party:
+class Party:
     
-    def __init__(self, game, name, playerTurn = 1): #0 is IA 1 is Player 
-        self.game = game
+    def __init__(self, game, name, playerTurn = 0): #0 is IA 1 is Player 
+        self.game = game()
         self.count = 0
         self.name = name
         self.playerTurn = playerTurn
@@ -19,9 +19,11 @@ class party:
         
     def runParty(self):
         while not self.isFinished():
+            print(self.game)
             if self.count%2 == self.playerTurn:
                 self.playPlayer()
             else:
+                print("ia play")
                 self.playIA()
             self.count = self.count + 1
         print("Finished !")
@@ -29,7 +31,7 @@ class party:
         
     def playIA(self):
         self.mM.UpdateNode(self.game)
-        self.mM.minimax_decision()
+        self.game = self.mM.minimax_decision()
     
     def playPlayer(self):
         coord = self.visual()
@@ -38,8 +40,7 @@ class party:
             coord = self.visual()
             
     def visual(self):
-        print("it's your turn " + self.name)
-        print(self.game)
+        print("it's your turn " + self.name)    
         print()
         print("select action : ")
         coord = self.game.askCoord()

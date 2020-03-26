@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Node import Node
+from Morpion import Morpion
 """
 essentials game methods :
  - toLines
@@ -14,6 +15,7 @@ essentials game methods :
 class Arbre:
     def __init__(self, game):
         self.game = game
+        print(type(game))
         self.node = Node(self.game())
         self.finDeBranches = 0
         self.nbSolutionTrouvee = 0

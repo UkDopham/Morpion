@@ -4,8 +4,8 @@ Created on Fri Mar 13 12:26:32 2020
 
 @author: Alexa
 """
-from case import Case
-from coord import Coord
+from Case import Case
+from Coord import Coord
 
 class Morpion:
     VAL_J1 = 1
@@ -187,8 +187,8 @@ class Morpion:
             return False
         
     def playerPlay(self, coord):
-        if self.matrix[coord.getRow][coord.getColumn].isFilled():
-            self.matrix[coord.getRow][coord.getColumn].setValue(self.VAL_J1)
+        if not self.matrix[coord.getRow()][coord.getColumn()].isFilled():
+            self.matrix[coord.getRow()][coord.getColumn()].setValue(self.VAL_J1)
             return True
         else:
             return False

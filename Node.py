@@ -13,7 +13,7 @@ class Node:
         self.value = value
         
     def find(self,value,rang,nbDifference=9):#look in this tree, if there is a node like value
-        if (rang == 0):#difference de l'hauteur dans l'arbre entre self et value
+        if (rang == 0):#difference de la hauteur dans l'arbre entre self et value
 
             if nbDifference==0:
                 return self
@@ -36,7 +36,18 @@ class Node:
             return count
         else :
             return self.value
-    
+
+    def GetAllPossiblesValues(self,valPossibles = [0,0,0]):
+        if isinstance( self.value , Morpion):
+            for i in self.nexts:
+                val = i.GetAllPossiblesValues(valPossibles)
+                if isinstance( val , int):
+                    valPossibles[0 if val == 1 else (1 if val==-1 else 2)] +=1
+
+            return valPossibles
+        else :
+            return self.value
+
     def GetAllValues(self): # return an array contaning de value of each next node (the order is kept)
         nexts_values = []
         for node in self.nexts:
@@ -73,10 +84,10 @@ class Node:
         node =self
         prev = []
         
-        print('Appuyez sur (0) pour revenir, et sur (.) pour sortir.')
+        print('\nAppuyez sur (0) pour revenir, (.) pour sortir, et (1-9) pour choisir une case.')
         ipt = -1
-        
-        print('rang: ',str(len(prev)+1),"    valeur:",str(node.GetValue()))
+        toutVal = self.GetAllPossiblesValues()
+        print('rang: ',str(len(prev)+1),"  tour de: ",str("X" if self.value.lastP==self.value.VAL_J1 else "O"),"  valeur:",str(self.GetValue()),'     victoire de : J1=',str(toutVal[0]), '  J2=',str(toutVal[1]),'  personne=', str(toutVal[2])) #ligne toute a fait visible, ce commentaire sert juste a la ralonger. voila.
         self.afficheProchains() 
         ipt = input()
         while ipt != '.':
@@ -86,7 +97,8 @@ class Node:
             else:
                 prev.append(node)
                 node =node.nexts[int(ipt)-1]
-            print('rang: ',str(len(prev)+1),"    valeur:",str(node.GetValue()))
+            toutVal = node.GetAllPossiblesValues([0,0,0]) #il faut repreciser la valeur du parametre! meme si il y a une valeur par defaut!!!
+            print('rang: ',str(len(prev)+1),"  tour de: ",str("X" if node.value.lastP==node.value.VAL_J1 else "O"),"  valeur:",str(node.GetValue()),'     victoire de : J1=',str(toutVal[0]), '  J2=',str(toutVal[1]),'  personne=', str(toutVal[2])) #ligne toute a fait visible, ce commentaire sert juste a la ralonger. voila.
             node.afficheProchains() 
             ipt = input()
 

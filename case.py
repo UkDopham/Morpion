@@ -30,3 +30,9 @@ class Case:
 
     def __repr__(self):
         return str(self.val)
+    
+    def isFilled(self):
+        return False if self.val == 0 else True
+    
+    def setValue(self, value):
+        self.val = value

@@ -5,7 +5,7 @@ Created on Fri Mar 13 12:26:32 2020
 @author: Alexa
 """
 from case import Case
-
+from coord import Coord
 
 class Morpion:
     VAL_J1 = 1
@@ -174,3 +174,27 @@ class Morpion:
                     if self.matrix[x][y] != other.matrix[x][y]:
                         cpt+=1
         return cpt
+    
+    def askCoord(self):
+        row = int(input("row ? :"))
+        column = int(input("column ? :"))
+        return Coord(row, column)
+    
+    def isFinished(self):
+        if (self.getState()==0 and len(self.emptyCases())==0) or (self.getState()!=0): # situation were the game ended
+            return True
+        else:
+            return False
+        
+    def playerPlay(self, coord):
+        if self.matrix[coord.getRow][coord.getColumn].isFilled():
+            self.matrix[coord.getRow][coord.getColumn].setValue(self.VAL_J1)
+            return True
+        else:
+            return False
+        
+    def getMatrix(self):
+        return self.matrix
+                                                               
+                                                              
+                                                              

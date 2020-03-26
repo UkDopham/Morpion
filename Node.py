@@ -43,18 +43,11 @@ class Node:
                 val = i.GetAllPossiblesValues(valPossibles)
                 if isinstance( val , int):
                     valPossibles[0 if val == 1 else (1 if val==-1 else 2)] +=1
-                elif isinstance( val , list):
-                    # valPossibles[0]=val[0]
-                    # valPossibles[1]=val[1]
-                    # valPossibles[2]=val[2]
-                    a=1
-                else:
-                    print('Error GetAllPossiblesValues : ',type(val))
-            # print(valPossibles)
+
             return valPossibles
         else :
             return self.value
-    
+
     def GetAllValues(self): # return an array contaning de value of each next node (the order is kept)
         nexts_values = []
         for node in self.nexts:
@@ -91,7 +84,7 @@ class Node:
         node =self
         prev = []
         
-        print('Appuyez sur (0) pour revenir, et sur (.) pour sortir.')
+        print('\nAppuyez sur (0) pour revenir, (.) pour sortir, et (1-9) pour choisir une case.')
         ipt = -1
         toutVal = self.GetAllPossiblesValues()
         print('rang: ',str(len(prev)+1),"  tour de: ",str("X" if self.value.lastP==self.value.VAL_J1 else "O"),"  valeur:",str(self.GetValue()),'     victoire de : J1=',str(toutVal[0]), '  J2=',str(toutVal[1]),'  personne=', str(toutVal[2])) #ligne toute a fait visible, ce commentaire sert juste a la ralonger. voila.

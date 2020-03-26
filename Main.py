@@ -12,7 +12,6 @@ from Minimax import MiniMax
 print("Debut")
 debutchrono = time.time()
 mM = MiniMax(Morpion)
-print('cpt: ', mM.arbre.compteur  ,'   fin de branches:', mM.arbre.finDeBranches)
 finchrono = time.time()
 print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
 

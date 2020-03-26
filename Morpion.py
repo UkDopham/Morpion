@@ -18,7 +18,8 @@ class Morpion:
         else:
             self.matrix = matrix
         self.lastP = lastP
-        self.casesVides =self.emptyCases()  # diminue le cout en temps mais risque augmenter le cout en espace!! 
+        self.lastCase = None
+        #self.casesVides =self.emptyCases()  # diminue le cout en temps mais risque augmenter le cout en espace!! 
     
     def clone(self):
         tab =[]
@@ -32,7 +33,7 @@ class Morpion:
 
     def createNexts(self):
         nexts = []
-        for caseVide in self.casesVides:
+        for caseVide in self.emptyCases():
             nexts.append(self.playTurn(caseVide.x,caseVide.y,True))
         # for i in range(0, len(self.casesVides)):
         #     nexts.append(self.playTurn(i,True))
@@ -43,7 +44,8 @@ class Morpion:
         if not createNewInstance:
             self.lastP = (self.VAL_J1 if self.lastP == self.VAL_J2 else self.VAL_J2)
             self.matrix[i][j] = Case(i,j,self.lastP)
-            self.casesVides = self.emptyCases()
+            self.lastCase = Case(i,j,self.lastP)
+            #self.casesVides = self.emptyCases()
         else:
             copie = self.clone()
             copie.playTurn(i,j,False)
@@ -158,12 +160,15 @@ class Morpion:
     def __ne__(self,other): #same
         return not self.__eq__(other)
 
-    def numberOfDifferences(self,other): #return the number of differences in two different instances of Morpion
+    def numberOfDifferences(self,other, lastCase=True): #return the number of differences in two different instances of Morpion
         cpt=0
-        for x in range(0, self.length):
-            for y in range(0, self.length):
-                if self.matrix[x][y] == other.matrix[x][y]:
-                    cpt+=1
-                
-        return (self.length**2)-cpt
-        
+        if lastCase:
+            if other.matrix[self.lastCase.x][self.lastCase.y] !=self.lastCase:
+                cpt+=1
+
+        else:
+            for x in range(0, self.length):
+                for y in range(0, self.length):
+                    if self.matrix[x][y] != other.matrix[x][y]:
+                        cpt+=1
+        return cpt

@@ -4,13 +4,18 @@ Created on Thu Mar 26 14:38:42 2020
 
 @author: Alexa
 """
+from Minimax import Minimax
+
+
+
 class party:
     
-    def __int__(self, game, name, playerTurn = 1): #0 is IA 1 is Player 
+    def __init__(self, game, name, playerTurn = 1): #0 is IA 1 is Player 
         self.game = game
         self.count = 0
         self.name = name
         self.playerTurn = playerTurn
+        self.mM = Minimax(game)
         
     def runParty(self):
         while not self.isFinished():
@@ -23,7 +28,8 @@ class party:
                 
         
     def playIA(self):
-        toto = 0
+        self.mM.UpdateNode(self.game)
+        self.mM.minimax_decision()
     
     def playPlayer(self):
         coord = self.visual()

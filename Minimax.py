@@ -18,14 +18,15 @@ essentials game methods :
 """
 
 
-class MiniMax:
+class Minimax:
     def __init__(self, game):
         self.game = game
         self.arbre = Arbre(game)
         self.node = Node(self.arbre.node)
         self.s = self.node.value# s: valeur du jeu dans notre cas
     
-    
+    def UpdateNode(self,state):
+        self.node = self.node.Find(state)
 
     def Actions(self,s):  # listes les actions possibles
         return self.node.nexts

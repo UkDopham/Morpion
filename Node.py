@@ -62,7 +62,7 @@ class Node:
             if nexts_values[indexe_MaxValue]>nexts_values[i]:
                 indexe_MaxValue=i
 
-        return self.nexts[indexe_MaxValue]
+        return self.nexts[indexe_MaxValue],nexts_values[i]
 
     def Min_LinkedNodeValue(self):  #return the node that has the smallest value
         nexts_values = self.GetAllValues()
@@ -72,7 +72,7 @@ class Node:
             if nexts_values[indexe_MaxValue]>nexts_values[i]:
                 indexe_MaxValue=i
 
-        return self.nexts[indexe_MaxValue]
+        return self.nexts[indexe_MaxValue],nexts_values[i]
 
     def __str__(self):
         # return "Valeur totale: "+ str(self.GetValue())

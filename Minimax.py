@@ -17,28 +17,50 @@ essentials game methods :
 
 """
 
+
 class MiniMax:
     def __init__(self, game):
         self.game = game
         self.arbre = Arbre(game)
         self.node = Node(self.arbre.node)
-
+        self.s = self.node.value# s: valeur du jeu dans notre cas
     
-    # s: valeur du jeu dans notre cas
+    
 
-    # def Actions(s):  # listes les actions possibles
-    # def Result(s,a):  #applique l'action a dans l'etat s
-    # def TerminalTest(s):  # test si s est terminal(fin de jeu)
-    # def Utility(s):  # attribut une valeur a l'etat s
+    def Actions(self,s):  # listes les actions possibles
+        return self.node.nexts
 
-    def minimax_decision(self, state):  # return de game state in the max node value
-        return self.max_value(state)
+    def Result(self,s,a):  #applique l'action a dans l'etat s
+        self.node = a
+
+    def TerminalTest(self,s):  # test si s est terminal(fin de jeu)
+        return len(self.node.nexts)==1 and isinstance( self.node.nexts[0],int)
+
+    # def Utility(self):  # attribut une valeur a l'etat s (interet??)
+    #     a=1     
+    
+
+
+
+    def minimax_decision(self, isMax=True):  # return de game state in the max node value
+        if not self.TerminalTest:
+            if isMax:
+                self.max_value(self.Actions(self.node)) 
+            else:
+                self.mini_value(self.Actions(self.node)) 
+        return self.node.value
 
     def max_value(self, state):  # node with de max value
-        return state.Max_LinkedNodeValue()
+        if not isinstance(state.value,int):
+            state, val = state.Max_LinkedNodeValue()
+            return self.mini_value(state)
+        return state.value
 
     def mini_value(self, state):  # node with de min value
-        return state.Max_LinkedNodeValue()
+        if not isinstance(state.value,int):
+            state, val = state.Max_LinkedNodeValue()
+            return self.max_value(state)
+        return state.value
 
     def __str__(self):
         return str(self.node)

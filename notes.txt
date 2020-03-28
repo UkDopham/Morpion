@@ -1,0 +1,17 @@
+methodes essentielles pour chaque jeu:
+    pour Minimax:
+        isFinished
+
+    pour Arbre:
+        createNexts
+
+    pour Node:
+        toLines
+        PointsCommuns
+        numberOfDifferences
+        eq
+
+    pour Party:
+        isFinished
+        playerPlay
+        askCoord

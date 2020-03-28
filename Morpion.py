@@ -5,7 +5,6 @@ Created on Fri Mar 13 12:26:32 2020
 @author: Alexa
 """
 from Case import Case
-from Coord import Coord
 
 class Morpion:
     VAL_J1 = 1
@@ -199,23 +198,33 @@ class Morpion:
     def askCoord(self):
         row = int(input("row ? :"))
         column = int(input("column ? :"))
-        return Coord(row, column)
+        return Case(row, column)
     
     def isFinished(self):
+        """ check if the game is finished  """
         if (self.getState()==0 and len(self.emptyCases())==0) or (self.getState()!=0): # situation were the game ended
             return True
         else:
             return False
         
-    def playerPlay(self, coord):
-        if not self.matrix[coord.getRow()][coord.getColumn()].isFilled():
-            self.matrix[coord.getRow()][coord.getColumn()].setValue(self.VAL_J1)
-            return True
-        else:
-            return False
+    def getCase(self,x,y=0):
+        """ return the case, either with x="Case" or x="coordX", y="coordY"  """
+        if isinstance(x,int):
+            return self.matrix[x][y]
+        elif isinstance(x,Case):
+            return self.matrix[x.x][x.y]
+
         
     def getMatrix(self):
         return self.matrix
                                                                
                                                               
-                                                              
+    def invertPlayers(self):
+        """  invert the values of player 1 and player 2 """
+        for x in range(self.length):                                   
+            for y in range(self.length):                                   
+                if self.matrix[x][y] == self.VAL_J1:
+                    self.matrix[x][y].setValue(self.VAL_J2)
+                elif self.matrix[x][y] == self.VAL_J2:
+                    self.matrix[x][y].setValue(self.VAL_J1)
+                

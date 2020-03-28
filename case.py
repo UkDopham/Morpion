@@ -32,7 +32,7 @@ class Case:
         return str(self.val)
     
     def isFilled(self):
-        return False if self.val == 0 else True
+        return self.val != 0 
     
     def setValue(self, value):
         self.val = value

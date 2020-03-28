@@ -2,7 +2,6 @@ import time
 from Morpion import Morpion
 from Arbre import Arbre
 from Minimax import Minimax
-from Coord import Coord
 from Party import Party
 
 game = Party(Morpion, "liolio")

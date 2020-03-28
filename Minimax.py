@@ -7,11 +7,14 @@ class Minimax:
     MIN_VAL = -1000   #valeur minimale possible
     MAX_VAL =  1000   #valeur maximale possible
 
-    def __init__(self, game):
+    def __init__(self, game, playerTurn =0, valFirstPlayerIsValJ2 = False):
         # generation de l'arbre des differents etats possibles
         debutchrono = time.time()
         self.arbre = Arbre(game)
         finchrono = time.time()
+        self.maximise = playerTurn == 1
+        self.invertGame = valFirstPlayerIsValJ2 # invertion is needed because the first player of the tree is J1
+        print('valFirstPlayerIsValJ2: ', valFirstPlayerIsValJ2)
         print("Travail termine !     temps ecoule: ", str(round(finchrono - debutchrono, 3)))
 
         self.game = game
@@ -45,12 +48,15 @@ class Minimax:
    
 
 
-    def Minimax_Decision(self, state,maximise = True,alphabeta=True):
+    def Minimax_Decision(self, state ,alphabeta=True):
+        if self.invertGame :
+            state.invertPlayers()
+
         if state != self.node.value:
             self.node = self.node.find2(state)
         val = None
         if alphabeta:
-            if maximise:
+            if self.maximise:
                 print('MAXIMISE')
                 self.node, val = self.MaxValueAB(self.node,self.MIN_VAL,self.MAX_VAL)
             else:
@@ -58,14 +64,20 @@ class Minimax:
                 self.node, val = self.MinValueAB(self.node,self.MIN_VAL,self.MAX_VAL)
         
         else:                
-            if maximise:
+            if self.maximise:
                 print('MAXIMISE')
                 self.node, val = self.MaxValue(self.node)
             else:
                 print('MINIMISE')
                 self.node, val = self.MinValue(self.node)
         print('val trouvee: ',val)
-        return self.node.value
+        
+        state = self.node.value.clone()
+
+        if self.invertGame :
+            state.invertPlayers()
+
+        return state
 
 
     def MaxValue(self,no,rang=0):

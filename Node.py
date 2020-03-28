@@ -36,7 +36,7 @@ class Node:
             # self.afficheProchains()
             for n in self.nexts:
                 value2 = n.value
-                if(isinstance(value2, Morpion)):
+                if not (isinstance(value2, int)):
                     nb = nbPointsCommuns + value2.PointsCommuns(value,True)
                     # print('Comparaisons: points communs=',nbPointsCommuns,'    rang=',rang, '   valide:',nb,'  ',nb!=0)
                     # print(value)
@@ -66,7 +66,7 @@ class Node:
         elif (rang>0): 
             for n in self.nexts:
                 value2 = n.value
-                if(isinstance(value2, Morpion)):
+                if not (isinstance(value2, int)):
                     nb = value2.numberOfDifferences(value,False)
                     # print('Comparaisons: differences=',nb)
                     # print(value)
@@ -78,24 +78,24 @@ class Node:
         return None
 
     def GetValue(self):#get the int value of the node
-        if isinstance( self.value , Morpion):
+        if isinstance( self.value , int):
+            return self.value
+        else :
             count = 0
             for i in self.nexts:
                 count += i.GetValue()
             return count
-        else :
-            return self.value
 
     def GetAllPossiblesValues(self,valPossibles = [0,0,0]):
-        if isinstance( self.value , Morpion):
+        if isinstance( self.value , int):
+            return self.value
+        else :
             for i in self.nexts:
                 val = i.GetAllPossiblesValues(valPossibles)
                 if isinstance( val , int):
                     valPossibles[0 if val == 1 else (1 if val==-1 else 2)] +=1
 
             return valPossibles
-        else :
-            return self.value
 
     def GetAllValues(self): # return an array contaning de value of each next node (the order is kept)
         nexts_values = []
@@ -161,7 +161,7 @@ class Node:
                 lignes[0]+='Etat :  '
                 lignes[1]+=((str(val)+" ") if val>0 else (str(val)))+'      '
                 lignes[2]+='      '
-            elif isinstance (val,Morpion):
+            elif isinstance (val,Morpion):#a voir
                 s = val.toLines(separateurLignes ='I| ').split('I')
                 for i in range(0,len(lignes)):
                     lignes[i]+=str(s[i+1])

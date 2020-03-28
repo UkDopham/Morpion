@@ -9,13 +9,20 @@ from Morpion import Morpion
 
 
 class Party:
+    VAL_J1 = 1
+    VAL_J2 = 2
     
-    def __init__(self, game, name, playerTurn = 0): #0 is IA 1 is Player 
+    def __init__(self, game, name, playerTurn = 0):
         self.game = game()
         self.count = 0
         self.name = name
         self.playerTurn = playerTurn
-        self.mM = Minimax(game)
+
+        self.val_Player = self.VAL_J2  
+        self.val_IA = self.VAL_J2 if self.val_Player == self.VAL_J1 else self.VAL_J1
+
+        valOfFirstToPlay = self.val_Player if playerTurn == 0 else self.val_IA
+        self.mM = Minimax(game,playerTurn,valOfFirstToPlay == self.VAL_J2)
         
     def runParty(self):
         while not self.isFinished():
@@ -27,19 +34,22 @@ class Party:
                 self.playIA()
             self.count = self.count + 1
         print(self.game)
+        print('You'if((self.count-1)%2 == self.playerTurn) else 'IA',' won!')
         print("Finished !")
                 
         
     def playIA(self):
-        # self.mM.UpdateNode(self.game)
-        self.game = self.mM.Minimax_Decision(self.game,self.playerTurn!=0).clone()
+        self.game = self.mM.Minimax_Decision(self.game)
+
     
     def playPlayer(self):
         coord = self.visual()
-        while not self.game.playerPlay(coord):
+        while self.game.getCase(coord).isFilled():
             print("error coord not correct ")
             coord = self.visual()
-            
+        self.game.getCase(coord).setValue(self.val_Player)    
+
+
     def visual(self):
         print("it's your turn " + self.name)    
         print()

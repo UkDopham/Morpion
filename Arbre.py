@@ -55,6 +55,7 @@ class Arbre:
             # node.afficheProchains()
 
     def fac(self, n):
+        """ factoriel """
         if (n==0):
             return 1
         return n * self.fac(n-1)
@@ -63,5 +64,3 @@ class Arbre:
 
     def __str__(self):
         return str(self.node)
- 
-   

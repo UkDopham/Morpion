@@ -150,7 +150,7 @@ class Morpion:
             isEqual = True
             for x in range(0, self.length):
                 for y in range(0, self.length):
-                    isEqual = isEqual and (self.matrix[x][y] == other.matrix[x][y])
+                    isEqual = (self.matrix[x][y] == other.matrix[x][y])
                     if not isEqual:
                         return isEqual
                     # print((self.matrix[x][y],'  ', other.matrix[x][y]),'  equal:',self.matrix[x][y] == other.matrix[x][y])
@@ -167,11 +167,32 @@ class Morpion:
         if lastCase:
             if other.matrix[self.lastCase.x][self.lastCase.y] !=self.lastCase:
                 cpt+=1
+            else:
+                cpt-=1
 
         else:
             for x in range(0, self.length):
                 for y in range(0, self.length):
                     if self.matrix[x][y] != other.matrix[x][y]:
+                        cpt+=1
+        return cpt
+    def PointsCommuns(self,other, lastCase=True, test=False): #return the number of differences in two different instances of Morpion
+        cpt=0
+        if lastCase:
+            if other.matrix[self.lastCase.x][self.lastCase.y].val ==self.lastCase.val:
+                # if test:
+                #     print('Erreur:')
+                #     print('case diff ? ', other.matrix[self.lastCase.x][self.lastCase.y].val ==self.lastCase.val)
+                #     print('val1:',other.matrix[self.lastCase.x][self.lastCase.y].val,'    val2:',self.lastCase.val)
+                #     print('coord: x=',self.lastCase.x,'   y=',self.lastCase.y)
+                #     print(other,self)
+                cpt+=1
+            
+
+        else:
+            for x in range(0, self.length):
+                for y in range(0, self.length):
+                    if self.matrix[x][y] == other.matrix[x][y]:
                         cpt+=1
         return cpt
     

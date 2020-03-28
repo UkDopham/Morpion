@@ -12,18 +12,67 @@ class Node:
         self.nexts = []
         self.value = value
         
-    def find(self,value,rang = 1,nbDifference=9):#look in this tree, if there is a node like value
+    def find(self,value,rang = 1,nbPointsCommuns=0,cpt=0,s=""):#look in this tree, if there is a node like value       
+        # print('find:    rang=',rang, '    nbDiff=',nbDifference)
+        # print(value)
+        # print(self)
+        if (rang == 0 and self.value.numberOfDifferences(value,False)==0 ):#difference de la hauteur dans l'arbre entre self et value       
+            # print("s")
+            # if nbPointsCommuns==9:
+            # if (self.value.numberOfDifferences(value)==0):
+            # print('Copy found:')
+            # print('nbPointsCommuns=',nbPointsCommuns,'    cpt=',cpt, '   erreur?:',self.value.PointsCommuns(value,True,True))
+            # print('last case ',s)
+            # # print('last case',self.value.lastCase.x,'x ',self.value.lastCase.y,'y  -')
+            # print(value)
+            # print(self)
+            # print()
+
+            #     return self
+            return self
+        elif (rang>0): 
+            # print('find:')
+            # print(self.value)
+            # self.afficheProchains()
+            for n in self.nexts:
+                value2 = n.value
+                if(isinstance(value2, Morpion)):
+                    nb = nbPointsCommuns + value2.PointsCommuns(value,True)
+                    # print('Comparaisons: points communs=',nbPointsCommuns,'    rang=',rang, '   valide:',nb,'  ',nb!=0)
+                    # print(value)
+                    # print(value2)
+                    
+                    if (nb>nbPointsCommuns):
+                        cpt+=1
+                        val = n.find(value,rang-1,nb,cpt,s+str(value2.lastCase.x)+'x '+str(value2.lastCase.y)+'y  _  ')
+                        if val is not None:
+                            return val
+        return None
+    def find2(self,value,rang = 1,nbDifference=-1):#look in this tree, if there is a node like value
+        if nbDifference ==-1:
+            nbDifference=9
+
+        # print('find:    rang=',rang, '    nbDiff=',nbDifference)
+        # print(value)
+        # print(self)
         if (rang == 0):#difference de la hauteur dans l'arbre entre self et value
 
             if nbDifference==0:
+                # print('Copy found:')
+                # print('last case',value.lastCase.x,' ',value.lastCase.y)
+                # print(value)
+                # print(self)
                 return self
         elif (rang>0): 
             for n in self.nexts:
                 value2 = n.value
                 if(isinstance(value2, Morpion)):
-                    nb = value2.numberOfDifferences(value)
+                    nb = value2.numberOfDifferences(value,False)
+                    # print('Comparaisons: differences=',nb)
+                    # print(value)
+                    # print(value2)
                     if (nbDifference>nb):
-                        val = n.find(value,rang-1,nb)
+                        val = n.find2(value,rang-1,nb)
                         if val is not None:
                             return val
         return None

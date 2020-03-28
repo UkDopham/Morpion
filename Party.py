@@ -26,12 +26,13 @@ class Party:
                 print("ia play")
                 self.playIA()
             self.count = self.count + 1
+        print(self.game)
         print("Finished !")
                 
         
     def playIA(self):
-        self.mM.UpdateNode(self.game)
-        self.game = self.mM.minimax_decision()
+        # self.mM.UpdateNode(self.game)
+        self.game = self.mM.Minimax_Decision(self.game,self.playerTurn!=0).clone()
     
     def playPlayer(self):
         coord = self.visual()

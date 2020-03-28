@@ -15,7 +15,6 @@ essentials game methods :
 class Arbre:
     def __init__(self, game):
         self.game = game
-        print(type(game))
         self.node = Node(self.game())
         self.finDeBranches = 0
         self.nbSolutionTrouvee = 0
@@ -34,11 +33,11 @@ class Arbre:
             actionsPossibles = node.value.createNexts()
             nexts = [Node(action) for action in actionsPossibles]
             node.nexts=[]
-
             i=0
             for nxt in nexts:
+                # print(nxt)
                 copie = None # TODO: indicateur pour nombre de liaisons trouvees?
-                if (rang < 3):# hauteur maximale plus optimale (permet de gagner en vitesse)
+                if (rang <7):# hauteur maximale plus optimale (permet de gagner en vitesse)
                     copie = self.node.find(nxt.value,rang) # check in the already calculated tree if this situation was already calculated
                 if copie is not None:
                     node.nexts.append(copie)
@@ -51,6 +50,9 @@ class Arbre:
                     i+=1
                     self.nbSolutionTrouvee+=self.fac(9-rang)
                     print(round(self.nbSolutionTrouvee/self.fac(9)*100),'%    nb de solutions trouvees: (',i,'-',self.cpt,') ',self.nbSolutionTrouvee)
+            # print("Arbre")
+            # print(node.value)
+            # node.afficheProchains()
 
     def fac(self, n):
         if (n==0):

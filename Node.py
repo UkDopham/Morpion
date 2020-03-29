@@ -5,6 +5,7 @@ Created on Fri Mar 13 12:58:58 2020
 @author: Alexa
 """
 from Morpion import Morpion
+from Puissance4 import Puissance4
 
 class Node:
     
@@ -152,8 +153,10 @@ class Node:
             ipt = input()
 
     def afficheProchains(self):#print all nexts nodes 
-        
-        lignes=['l1  ','l2  ','l3  ']
+        taille = self.value.length if isinstance(self.value,Morpion )else self.value.lengthy
+        lignes=[]
+        for i in range(taille):
+            lignes.append('l'+ str(i+1)+'  ')
 
         for n in self.nexts:
             val = n.value
@@ -161,7 +164,7 @@ class Node:
                 lignes[0]+='Etat :  '
                 lignes[1]+=((str(val)+" ") if val>0 else (str(val)))+'      '
                 lignes[2]+='      '
-            elif isinstance (val,Morpion):#a voir
+            elif isinstance (val,Morpion)or isinstance (val,Puissance4):#a voir
                 s = val.toLines(separateurLignes ='I| ').split('I')
                 for i in range(0,len(lignes)):
                     lignes[i]+=str(s[i+1])

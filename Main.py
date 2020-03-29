@@ -1,17 +1,16 @@
 import time
 from Morpion import Morpion
+from Puissance4 import Puissance4
 from Arbre import Arbre
 from Minimax import Minimax
 from Party import Party
 
-game = Party(Morpion, "liolio")
+game = Party(Morpion, "liolio",playerTurn=1)
+# game = Party(Puissance4, "liolio") #ne marche pas encore 
 game.runParty()
 
-#avec find 32 s   30%
-#sans find 29 s   30%
 
-# test = Morpion()
 
-# coord = inputUser(test)
-# print(coord)
+# m = Minimax(Puissance4)
+# m.arbre.node.gothrough()
 

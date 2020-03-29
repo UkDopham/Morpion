@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Node import Node
 from Morpion import Morpion
+from Puissance4 import Puissance4
 """
 essentials game methods :
  - toLines
@@ -44,21 +45,28 @@ class Arbre:
                 else:
                     node.nexts.append(nxt)
                     self.generateNodeBranches(nxt,rang=rang+1)  # otherwise calculates the new values
+                    
                 
                 if (rang==1):  #Indicateur de progretion de la recherche
+                    valMax = 1
+                    if (self.game is Puissance4):
+                        valMax=node.value.lengthx*node.value.lengthy
+                    elif (self.game is Morpion):
+                        valMax=9
                     self.cpt+=1
                     i+=1
-                    self.nbSolutionTrouvee+=self.fac(9-rang)
-                    print(round(self.nbSolutionTrouvee/self.fac(9)*100),'%    nb de solutions trouvees: (',i,'-',self.cpt,') ',self.nbSolutionTrouvee)
+                    self.nbSolutionTrouvee+=self.fac(valMax-rang)
+                    print(round(self.nbSolutionTrouvee/self.fac(valMax)*100),'%    nb de solutions trouvees: (',i,'-',self.cpt,') ',self.nbSolutionTrouvee)
             # print("Arbre")
             # print(node.value)
             # node.afficheProchains()
 
     def fac(self, n):
         """ factoriel """
-        if (n==0):
-            return 1
-        return n * self.fac(n-1)
+        res = 1
+        for i in range(1,n+1):
+            res*=i
+        return res  
 
 
 
